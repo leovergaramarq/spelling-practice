@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spelling Practice</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      button,
+      input,
+      textarea {
+        margin: 10px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      #result {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      #wordList {
+        width: 90%;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Spelling Practice</h1>
+    <p>Listen and type the word:</p>
+    <button onclick="sayWord()">🔊 Play Word</button><br />
+    <div>
+      <input
+        id="answer"
+        type="text"
+        placeholder="Type here..."
+        onkeydown="if(event.key==='Enter'){checkAnswer()}"
+      />
+      <button onclick="checkAnswer()">Check</button>
+    </div>
+
+    <div>
+      <button onclick="speakAnswer()">🎤 Or speak Answer</button>
+    </div>
+    <p id="result"></p>
+
+    <h2>Customize Word List</h2>
+    <p>Enter one word per line:</p>
+    <textarea id="wordList"></textarea><br />
+    <button onclick="saveWords()">💾 Save List</button>
+
+    <script>
+      let words = [];
+      let currentWord = "";
+
+      // Load saved words or default
+      function loadWords() {
+        const saved = localStorage.getItem("spellingWords");
+        if (saved) {
+          words = JSON.parse(saved);
+        } else {
+          words = ["apple", "banana", "friend", "computer", "knowledge"];
+        }
+        document.getElementById("wordList").value = words.join("\n");
+      }
+
+      function saveWords() {
+        const input = document.getElementById("wordList").value.trim();
+        words = input
+          .split(/\s*\n\s*/)
+          .filter(Boolean)
+          .map((word) => word.toLowerCase()); // split by line
+        localStorage.setItem("spellingWords", JSON.stringify(words));
+        alert("✅ Word list saved!");
+      }
+
+      function getRandomWord() {
+        if (words.length === 0) {
+          alert("⚠️ Word list is empty!");
+          return "";
+        }
+        return words[Math.floor(Math.random() * words.length)];
+      }
+
+      function sayWord() {
+        currentWord = getRandomWord();
+        if (!currentWord) return;
+        const utterance = new SpeechSynthesisUtterance(currentWord);
+        utterance.lang = "en-US";
+        speechSynthesis.speak(utterance);
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+      }
+
+      function checkAnswer() {
+        const input = document
+          .getElementById("answer")
+          .value.trim()
+          .toLowerCase();
+        if (input === currentWord) {
+          document.getElementById("result").innerText = "✅ Correct!";
+          document.getElementById("result").style.color = "green";
+        } else {
+          document.getElementById(
+            "result"
+          ).innerText = `❌ Wrong! It was: ${currentWord}`;
+          document.getElementById("result").style.color = "red";
+        }
+      }
+
+      function speakAnswer() {
+        if (!("webkitSpeechRecognition" in window)) {
+          alert("⚠️ Speech Recognition not supported in this browser.");
+          return;
+        }
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.start();
+
+        recognition.onresult = function (event) {
+          const spoken = event.results[0][0].transcript
+            .trim()
+            .replace(/\./g, "")
+            .toLowerCase();
+          if (spoken === currentWord) {
+            document.getElementById("result").innerText =
+              "✅ Correct (spoken)!";
+            document.getElementById("result").style.color = "green";
+          } else {
+            document.getElementById(
+              "result"
+            ).innerText = `❌ You said: "${spoken}" — It was: ${currentWord}`;
+            document.getElementById("result").style.color = "red";
+          }
+        };
+      }
+
+      // Initialize
+      loadWords();
+    </script>
+  </body>
+</html>
