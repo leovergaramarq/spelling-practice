@@ -1,0 +1,19 @@
+{
+  "name": "spelling-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && mkdir dist && inline-source index.html > dist/index.html",
+    "dev": "live-server --open=./index.html --port=5500",
+    "start": "live-server --open=./dist/index.html --port=3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "inline-source-cli": "^2.0.0",
+    "live-server": "^1.2.2",
+    "rimraf": "^6.0.1"
+  }
+}
