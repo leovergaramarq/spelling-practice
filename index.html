@@ -10,7 +10,12 @@
   <body>
     <h1>Spelling Practice</h1>
     <p>Listen and type the word:</p>
-    <button id="speakWord">🔊 Play Word</button><br />
+    <div id="wordContainer">
+      <button id="speakWord">🔊 Play Word</button>
+      <button id="replayWord">🔁 Replay</button>
+      <button id="showHideWord">👁️ Show/Hide Word</button>
+      <div id="currentWordDisplay" style="display: none"></div>
+    </div>
     <div id="answerContainer">
       <input id="answer" type="text" placeholder="Type here..." />
       <button id="checkAnswer">Check</button>
@@ -21,13 +26,26 @@
     </div>
     <p id="result"></p>
 
-    <h2>Customize Word List</h2>
+    <h2>Word List Management</h2>
+
+    <div id="wordListSelector">
+      <label for="wordListSelect">Current List:</label>
+      <select id="wordListSelect">
+        <option value="default">Default List</option>
+      </select>
+      <div id="wordListSelectorButtons">
+        <button id="createNewList">➕ New List</button>
+        <button id="deleteList">🗑️ Delete selected List</button>
+      </div>
+    </div>
+
+    <h3>Customize Word List</h3>
     <p>Enter one word per line:</p>
-    <textarea id="wordList" rows="10"></textarea><br />
+    <textarea id="wordList" rows="10"></textarea>
 
     <div id="saveWordsContainer">
       <button id="saveWords">💾 Save List</button>
-      <button id="resetWords">🔄 Reset List</button>
+      <button id="resetWords">🔄 Reset to Original</button>
     </div>
 
     <script type="module" src="index.js"></script>

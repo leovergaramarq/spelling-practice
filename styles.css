@@ -1,9 +1,9 @@
 @font-face {
-  font-family: "Poppins-Light";
-  src: url("./assets/fonts/Poppins/Poppins-Light.ttf") format("truetype");
+  font-family: 'Poppins-Light';
+  src: url('./assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
 }
 body {
-  font-family: "Poppins-Light";
+  font-family: 'Poppins-Light';
   text-align: center;
   padding: 20px;
 }
@@ -48,4 +48,45 @@ button {
 
 #saveWordsContainer {
   margin-top: 20px;
+}
+
+#wordListSelector {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#wordListSelector label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#wordListSelect {
+  margin-right: 10px;
+  min-width: 150px;
+}
+
+#currentWordDisplay {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e8f4fd;
+  border: 2px solid #0066cc;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+#wordContainer {
+  margin: 20px 0;
+}
+
+#wordContainer button {
+  margin: 5px;
+}
+
+#wordListSelectorButtons {
+  margin-top: 10px;
 }
