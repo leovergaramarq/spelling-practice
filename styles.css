@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Poppins-Light";
+  src: url("./assets/fonts/Poppins/Poppins-Light.ttf") format("truetype");
+}
+body {
+  font-family: "Poppins-Light";
+  text-align: center;
+  padding: 20px;
+}
+
+button,
+input,
+textarea {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+button {
+  background-color: #f0f0f0;
+  cursor: pointer;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  transition: background-color 0.3s ease;
+}
+
+#result {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#wordList {
+  width: 90%;
+  height: 100px;
+}
+
+#answerContainer {
+  margin-top: 20px;
+}
+
+#speakAnswerContainer {
+  margin-top: 20px;
+}
+
+#saveWordsContainer {
+  margin-top: 20px;
+}
