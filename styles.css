@@ -39,7 +39,16 @@ button {
 }
 
 #answerContainer {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
   margin-top: 20px;
+  width: auto;
+  max-width: 100%;
+
+  input {
+    max-width: 50%;
+  }
 }
 
 #speakAnswerContainer {
@@ -89,4 +98,8 @@ button {
 
 #wordListSelectorButtons {
   margin-top: 10px;
+}
+
+select {
+  max-width: 100%;
 }
